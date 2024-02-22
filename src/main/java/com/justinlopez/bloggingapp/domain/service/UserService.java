@@ -16,6 +16,7 @@ public class UserService implements IUserUseCase {
 
     private final IUserRepository iUserRepository;
 
+
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 
@@ -31,23 +32,46 @@ public class UserService implements IUserUseCase {
 
     }
 
+
     @Override
     public Optional<UserRequestDTO> getUserById(Long id) {
+
         return iUserRepository.findUserById(id);
+
     }
+
 
     @Override
     public List<UserRequestDTO> getAllUsers() {
-        return null;
+
+        return iUserRepository.getAll();
+
     }
+
 
     @Override
     public Optional<UserRequestDTO> updateUser(UserRequestDTO userRequestDTO) {
+
+        if (iUserRepository.findUserById(userRequestDTO.getId()).isPresent()) {
+            return Optional.of(iUserRepository.save(userRequestDTO));
+        }
+
         return Optional.empty();
+
     }
+
 
     @Override
     public boolean deleteUser(Long id) {
+
+        if (iUserRepository.findUserById(id).isPresent()) {
+            iUserRepository.delete(id);
+            return true;
+        }
+
         return false;
+
     }
+
+    
 }
