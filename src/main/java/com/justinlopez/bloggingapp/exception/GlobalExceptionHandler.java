@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserNotExistException.class)
-    public ProblemDetail notFoundException(RuntimeException e) {
+    @ExceptionHandler({UserNotExistException.class, CategoryNotExistException.class})
+    public ProblemDetail resourceNotFoundException(RuntimeException e) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
     }
 }

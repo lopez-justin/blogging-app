@@ -24,13 +24,12 @@ public class UserController {
     }
 
     // Update
-    @PatchMapping("/update")
+    @PatchMapping
     public ResponseEntity<UserRequestDTO> updateUser(@RequestBody UserRequestDTO userRequestDTO) {
         return ResponseEntity.of(iUserUseCase.updateUser(userRequestDTO));
     }
 
     // Get by id
-
     @GetMapping("/{id}")
     public ResponseEntity<UserRequestDTO> getUserById(@PathVariable Long id) {
         return ResponseEntity.of(iUserUseCase.getUserById(id));
