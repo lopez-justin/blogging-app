@@ -4,6 +4,7 @@ import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
 import com.justinlopez.bloggingapp.domain.use_case.IUserUseCase;
+import com.justinlopez.bloggingapp.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,11 @@ public class UserService implements IUserUseCase {
     @Override
     public Optional<UserRequestDTO> getUserById(Long id) {
 
+        // Return exception if user does not exist
+        if (iUserRepository.findUserById(id).isEmpty()) {
+            throw new UserNotExistException(id.toString());
+        }
+
         return iUserRepository.findUserById(id);
 
     }
@@ -52,11 +58,11 @@ public class UserService implements IUserUseCase {
     @Override
     public Optional<UserRequestDTO> updateUser(UserRequestDTO userRequestDTO) {
 
-        if (iUserRepository.findUserById(userRequestDTO.getId()).isPresent()) {
-            return Optional.of(iUserRepository.save(userRequestDTO));
+        if (iUserRepository.findUserById(userRequestDTO.getId()).isEmpty()) {
+            return Optional.empty();
         }
 
-        return Optional.empty();
+        return Optional.of(iUserRepository.save(userRequestDTO));
 
     }
 

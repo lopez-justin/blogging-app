@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
@@ -22,7 +24,7 @@ public class UserController {
     }
 
     // Update
-    @PatchMapping
+    @PatchMapping("/update")
     public ResponseEntity<UserRequestDTO> updateUser(@RequestBody UserRequestDTO userRequestDTO) {
         return ResponseEntity.of(iUserUseCase.updateUser(userRequestDTO));
     }
@@ -36,7 +38,7 @@ public class UserController {
 
     // Get all
     @GetMapping
-    public ResponseEntity<?> getAllUsers() {
+    public ResponseEntity<List<UserRequestDTO>> getAllUsers() {
         return ResponseEntity.ok(iUserUseCase.getAllUsers());
     }
 
