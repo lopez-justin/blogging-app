@@ -27,6 +27,14 @@ public class PostController {
 
     }
 
+    // Get by id
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<PostRequestDTO> getPostById(@PathVariable Long id) {
+
+        return ResponseEntity.ok(iPostUseCase.getPostById(id));
+
+    }
+
     // Delete
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Boolean> deletePost(@PathVariable Long id) {

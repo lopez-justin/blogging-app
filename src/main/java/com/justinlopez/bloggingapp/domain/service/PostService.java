@@ -6,6 +6,7 @@ import com.justinlopez.bloggingapp.domain.repository.IPostRepository;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
 import com.justinlopez.bloggingapp.domain.use_case.IPostUseCase;
 import com.justinlopez.bloggingapp.exception.CategoryNotExistException;
+import com.justinlopez.bloggingapp.exception.PostNotExistException;
 import com.justinlopez.bloggingapp.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,9 @@ public class PostService implements IPostUseCase {
 
     @Override
     public PostRequestDTO getPostById(Long id) {
-        return null;
+
+        return iPostRepository.findById(id).orElseThrow(() -> new PostNotExistException(id.toString()));
+
     }
 
     @Override
