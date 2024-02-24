@@ -25,19 +25,19 @@ public class UserController {
 
     // Update
     @PatchMapping
-    public ResponseEntity<UserRequestDTO> updateUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO userRequestDTO) {
         return ResponseEntity.of(iUserUseCase.updateUser(userRequestDTO));
     }
 
     // Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<UserRequestDTO> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
         return ResponseEntity.of(iUserUseCase.getUserById(id));
     }
 
     // Get all
     @GetMapping
-    public ResponseEntity<List<UserRequestDTO>> getAllUsers() {
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         return ResponseEntity.ok(iUserUseCase.getAllUsers());
     }
 

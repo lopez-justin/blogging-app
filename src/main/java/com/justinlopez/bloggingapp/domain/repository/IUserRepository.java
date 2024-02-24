@@ -1,17 +1,18 @@
 package com.justinlopez.bloggingapp.domain.repository;
 
 import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
+import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IUserRepository {
 
-    UserRequestDTO save(UserRequestDTO userRequestDTO);
+    UserResponseDTO save(UserRequestDTO userRequestDTO);
 
-    Optional<UserRequestDTO> findUserById(Long id);
+    Optional<UserResponseDTO> findUserById(Long id);
 
-    List<UserRequestDTO> getAll();
+    List<UserResponseDTO> getAll();
 
     void delete(Long id);
 

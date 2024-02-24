@@ -21,21 +21,13 @@ public class UserService implements IUserUseCase {
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 
-        UserRequestDTO savedUser = iUserRepository.save(userRequestDTO);
-
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.setId(savedUser.getId());
-        userResponseDTO.setName(savedUser.getName());
-        userResponseDTO.setEmail(savedUser.getEmail());
-        userResponseDTO.setAbout(savedUser.getAbout());
-
-        return userResponseDTO;
+        return iUserRepository.save(userRequestDTO);
 
     }
 
 
     @Override
-    public Optional<UserRequestDTO> getUserById(Long id) {
+    public Optional<UserResponseDTO> getUserById(Long id) {
 
         // Return exception if user does not exist
         if (iUserRepository.findUserById(id).isEmpty()) {
@@ -48,7 +40,7 @@ public class UserService implements IUserUseCase {
 
 
     @Override
-    public List<UserRequestDTO> getAllUsers() {
+    public List<UserResponseDTO> getAllUsers() {
 
         return iUserRepository.getAll();
 
@@ -56,7 +48,7 @@ public class UserService implements IUserUseCase {
 
 
     @Override
-    public Optional<UserRequestDTO> updateUser(UserRequestDTO userRequestDTO) {
+    public Optional<UserResponseDTO> updateUser(UserRequestDTO userRequestDTO) {
 
         if (iUserRepository.findUserById(userRequestDTO.getId()).isEmpty()) {
             return Optional.empty();
