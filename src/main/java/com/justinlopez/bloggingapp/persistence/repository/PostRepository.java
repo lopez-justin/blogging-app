@@ -55,6 +55,6 @@ public class PostRepository implements IPostRepository {
 
     @Override
     public void delete(Long id) {
-
+        iPostJpaRepository.deleteById(id);
     }
 }

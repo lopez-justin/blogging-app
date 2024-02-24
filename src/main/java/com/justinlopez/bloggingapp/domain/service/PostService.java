@@ -75,6 +75,13 @@ public class PostService implements IPostUseCase {
 
     @Override
     public boolean deletePost(Long id) {
-        return false;
+
+        if (iPostRepository.findById(id).isEmpty()) {
+            return false;
+        }
+
+        iPostRepository.delete(id);
+        return true;
+
     }
 }

@@ -27,4 +27,12 @@ public class PostController {
 
     }
 
+    // Delete
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long id) {
+
+        return new ResponseEntity<>(iPostUseCase.deletePost(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+
+    }
+
 }
