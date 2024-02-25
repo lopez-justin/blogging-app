@@ -12,7 +12,7 @@ public interface IPostRepository {
 
     Optional<PostRequestDTO> findById(Long id);
 
-    PostResponseDTO getAll();
+    PostResponseDTO getAll(Integer pageNumber, Integer pageSize);
 
     PostResponseDTO getAllByUser(Long userId);
 

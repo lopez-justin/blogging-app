@@ -1,6 +1,7 @@
 package com.justinlopez.bloggingapp.controller;
 
 import com.justinlopez.bloggingapp.domain.dto.PostRequestDTO;
+import com.justinlopez.bloggingapp.domain.dto.PostResponseDTO;
 import com.justinlopez.bloggingapp.domain.use_case.IPostUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,32 @@ public class PostController {
     public ResponseEntity<PostRequestDTO> getPostById(@PathVariable Long id) {
 
         return ResponseEntity.ok(iPostUseCase.getPostById(id));
+
+    }
+
+    // Get by user id
+    @GetMapping("/user/{userId}/posts")
+    public ResponseEntity<PostRequestDTO> getPostByUserId(@PathVariable Long userId) {
+
+        return null;
+
+    }
+
+    // Get by category id
+    @GetMapping("/category/{categoryId}/posts")
+    public ResponseEntity<PostRequestDTO> getPostByCategoryId(@PathVariable Long categoryId) {
+
+        return null;
+
+    }
+
+    // Get all posts
+    @GetMapping("/posts")
+    public ResponseEntity<PostResponseDTO> getAllPosts(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize) {
+
+        return ResponseEntity.ok(iPostUseCase.getAllPosts(pageNumber, pageSize));
 
     }
 

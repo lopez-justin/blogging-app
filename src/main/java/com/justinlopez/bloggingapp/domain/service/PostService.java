@@ -52,8 +52,10 @@ public class PostService implements IPostUseCase {
     }
 
     @Override
-    public PostResponseDTO getAllPosts() {
-        return null;
+    public PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize) {
+
+        return iPostRepository.getAll(pageNumber, pageSize);
+
     }
 
     @Override
@@ -73,7 +75,13 @@ public class PostService implements IPostUseCase {
 
     @Override
     public PostRequestDTO updatePost(PostRequestDTO postRequestDTO) {
-        return null;
+
+        if (iPostRepository.findById(postRequestDTO.getPostId()).isEmpty()) {
+            throw new PostNotExistException(postRequestDTO.getPostId().toString());
+        }
+
+        return iPostRepository.save(postRequestDTO);
+
     }
 
     @Override

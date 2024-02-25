@@ -18,6 +18,6 @@ public class PostResponseDTO {
 
     private Integer totalPages;
 
-    private Boolean lastPage;
+    private boolean lastPage;
 
 }
