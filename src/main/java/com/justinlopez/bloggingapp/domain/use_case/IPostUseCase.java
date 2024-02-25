@@ -11,9 +11,9 @@ public interface IPostUseCase {
 
     PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize);
 
-    PostResponseDTO getAllPostsByUser(Long userId);
+    PostResponseDTO getAllPostsByUser(Long userId, Integer pageNumber, Integer pageSize);
 
-    PostResponseDTO getAllPostsByCategory(Long categoryId);
+    PostResponseDTO getAllPostsByCategory(Long categoryId, Integer pageNumber, Integer pageSize);
 
     PostResponseDTO getAllPostsByTitle(String title);
 

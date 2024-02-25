@@ -38,17 +38,23 @@ public class PostController {
 
     // Get by user id
     @GetMapping("/user/{userId}/posts")
-    public ResponseEntity<PostRequestDTO> getPostByUserId(@PathVariable Long userId) {
+    public ResponseEntity<PostResponseDTO> getPostsByUserId(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @PathVariable Long userId) {
 
-        return null;
+        return ResponseEntity.ok(iPostUseCase.getAllPostsByUser(userId, pageNumber, pageSize));
 
     }
 
     // Get by category id
     @GetMapping("/category/{categoryId}/posts")
-    public ResponseEntity<PostRequestDTO> getPostByCategoryId(@PathVariable Long categoryId) {
+    public ResponseEntity<PostResponseDTO> getPostByCategoryId(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @PathVariable Long categoryId) {
 
-        return null;
+        return ResponseEntity.ok(iPostUseCase.getAllPostsByCategory(categoryId, pageNumber, pageSize));
 
     }
 

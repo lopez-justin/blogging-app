@@ -59,13 +59,32 @@ public class PostService implements IPostUseCase {
     }
 
     @Override
-    public PostResponseDTO getAllPostsByUser(Long userId) {
-        return null;
+    public PostResponseDTO getAllPostsByUser(Long userId, Integer pageNumber, Integer pageSize) {
+
+        if (iUserRepository.findUserById(userId).isEmpty()) {
+            throw new UserNotExistException(userId.toString());
+        }
+
+        return iPostRepository.getAllByUser(
+                userId,
+                pageNumber,
+                pageSize
+        );
+
     }
 
     @Override
-    public PostResponseDTO getAllPostsByCategory(Long categoryId) {
-        return null;
+    public PostResponseDTO getAllPostsByCategory(Long categoryId, Integer pageNumber, Integer pageSize) {
+
+        CategoryDTO categoryDTO = iCategoryRepository
+                .findById(categoryId)
+                .orElseThrow(() -> new CategoryNotExistException(categoryId.toString()));
+
+        return iPostRepository.getAllByCategory(
+                categoryDTO,
+                pageNumber,
+                pageSize);
+
     }
 
     @Override
