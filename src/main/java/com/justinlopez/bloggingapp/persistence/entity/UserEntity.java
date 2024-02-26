@@ -23,7 +23,7 @@ public class UserEntity {
 
     private String about;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostEntity> posts;
 
 }

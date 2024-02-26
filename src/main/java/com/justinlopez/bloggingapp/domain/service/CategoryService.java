@@ -49,7 +49,7 @@ public class CategoryService implements ICategoryUseCase {
     public boolean deleteCategory(Long id) {
 
         if (iCategoryRepository.findById(id).isEmpty()) {
-            return false;
+            throw new CategoryNotExistException(id.toString());
         }
 
         iCategoryRepository.delete(id);

@@ -95,11 +95,13 @@ public class PostService implements IPostUseCase {
     @Override
     public PostRequestDTO updatePost(PostRequestDTO postRequestDTO) {
 
-        if (iPostRepository.findById(postRequestDTO.getPostId()).isEmpty()) {
-            throw new PostNotExistException(postRequestDTO.getPostId().toString());
-        }
+        PostRequestDTO post = iPostRepository.findById(postRequestDTO.getPostId())
+                .orElseThrow(() -> new PostNotExistException(postRequestDTO.getPostId().toString()));
+        post.setTitle(postRequestDTO.getTitle());
+        post.setContent(postRequestDTO.getContent());
+        post.setImage(postRequestDTO.getImage());
 
-        return iPostRepository.save(postRequestDTO);
+        return iPostRepository.save(post);
 
     }
 
@@ -107,7 +109,7 @@ public class PostService implements IPostUseCase {
     public boolean deletePost(Long id) {
 
         if (iPostRepository.findById(id).isEmpty()) {
-            return false;
+            throw new PostNotExistException(id.toString());
         }
 
         iPostRepository.delete(id);
