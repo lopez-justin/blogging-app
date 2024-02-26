@@ -9,7 +9,7 @@ public interface IPostUseCase {
 
     PostRequestDTO getPostById(Long id);
 
-    PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize);
+    PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
 
     PostResponseDTO getAllPostsByUser(Long userId, Integer pageNumber, Integer pageSize);
 

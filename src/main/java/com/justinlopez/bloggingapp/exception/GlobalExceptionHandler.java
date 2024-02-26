@@ -16,4 +16,10 @@ public class GlobalExceptionHandler {
     public ProblemDetail resourceNotFoundException(RuntimeException e) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
     }
+
+    @ExceptionHandler({MissingRequiredFieldsException.class})
+    public ProblemDetail badRequestException(RuntimeException e) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
 }

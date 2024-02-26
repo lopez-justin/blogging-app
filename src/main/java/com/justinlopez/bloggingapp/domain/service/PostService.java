@@ -52,9 +52,9 @@ public class PostService implements IPostUseCase {
     }
 
     @Override
-    public PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize) {
+    public PostResponseDTO getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir) {
 
-        return iPostRepository.getAll(pageNumber, pageSize);
+        return iPostRepository.getAll(pageNumber, pageSize, sortBy, sortDir);
 
     }
 

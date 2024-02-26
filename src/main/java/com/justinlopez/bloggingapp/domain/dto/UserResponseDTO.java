@@ -1,6 +1,5 @@
 package com.justinlopez.bloggingapp.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

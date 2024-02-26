@@ -4,6 +4,7 @@ import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
 import com.justinlopez.bloggingapp.persistence.crud.IUserJpaRepository;
+import com.justinlopez.bloggingapp.persistence.entity.UserEntity;
 import com.justinlopez.bloggingapp.persistence.mapper.IUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -25,8 +26,8 @@ public class UserRepository implements IUserRepository {
     public UserResponseDTO save(UserRequestDTO userRequestDTO) {
 
         UserRequestDTO user = iUserMapper.toUserDTO(iUserJpaRepository.save(iUserMapper.toUserEntity(userRequestDTO)));
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
 
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
         if (user != null) {
             userResponseDTO.setId(user.getId());
             userResponseDTO.setName(user.getName());
@@ -40,18 +41,23 @@ public class UserRepository implements IUserRepository {
     @Override
     public Optional<UserResponseDTO> findUserById(Long id) {
 
-        UserRequestDTO user = iUserMapper.toUserDTO(iUserJpaRepository.findById(id).orElse(null));
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        UserEntity userEntity = iUserJpaRepository.findById(id).orElse(null);
+        UserRequestDTO user = iUserMapper.toUserDTO(userEntity);
 
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
         if (user != null) {
             userResponseDTO.setId(user.getId());
             userResponseDTO.setName(user.getName());
             userResponseDTO.setEmail(user.getEmail());
             userResponseDTO.setAbout(user.getAbout());
         }
-        return Optional.of(userResponseDTO);
 
-        //return iUserJpaRepository.findById(id).map(iUserMapper::toUserDTO);
+        if (userResponseDTO.getId() == null){
+            return Optional.empty();
+        } else {
+            return Optional.of(userResponseDTO);
+        }
+
     }
 
     @Override
@@ -76,4 +82,5 @@ public class UserRepository implements IUserRepository {
     public void delete(Long id) {
         iUserJpaRepository.deleteById(id);
     }
+
 }

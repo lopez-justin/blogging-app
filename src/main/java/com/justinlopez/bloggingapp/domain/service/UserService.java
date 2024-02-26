@@ -4,12 +4,12 @@ import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
 import com.justinlopez.bloggingapp.domain.use_case.IUserUseCase;
+import com.justinlopez.bloggingapp.exception.MissingRequiredFieldsException;
 import com.justinlopez.bloggingapp.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -21,20 +21,21 @@ public class UserService implements IUserUseCase {
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 
+        if (userRequestDTO.getName() == null || userRequestDTO.getName().isEmpty() ||
+                userRequestDTO.getEmail() == null || userRequestDTO.getEmail().isEmpty() ||
+                userRequestDTO.getPassword() == null || userRequestDTO.getPassword().isEmpty()) {
+            throw new MissingRequiredFieldsException();
+        }
+
         return iUserRepository.save(userRequestDTO);
 
     }
 
 
     @Override
-    public Optional<UserResponseDTO> getUserById(Long id) {
+    public UserResponseDTO getUserById(Long id) {
 
-        // Return exception if user does not exist
-        if (iUserRepository.findUserById(id).isEmpty()) {
-            throw new UserNotExistException(id.toString());
-        }
-
-        return iUserRepository.findUserById(id);
+        return iUserRepository.findUserById(id).orElseThrow(() -> new UserNotExistException(id.toString()));
 
     }
 
@@ -48,13 +49,13 @@ public class UserService implements IUserUseCase {
 
 
     @Override
-    public Optional<UserResponseDTO> updateUser(UserRequestDTO userRequestDTO) {
+    public UserResponseDTO updateUser(UserRequestDTO userRequestDTO) {
 
         if (iUserRepository.findUserById(userRequestDTO.getId()).isEmpty()) {
-            return Optional.empty();
+            throw new UserNotExistException(userRequestDTO.getId().toString());
         }
 
-        return Optional.of(iUserRepository.save(userRequestDTO));
+        return iUserRepository.save(userRequestDTO);
 
     }
 
@@ -62,12 +63,12 @@ public class UserService implements IUserUseCase {
     @Override
     public boolean deleteUser(Long id) {
 
-        if (iUserRepository.findUserById(id).isPresent()) {
-            iUserRepository.delete(id);
-            return true;
+        if (iUserRepository.findUserById(id).isEmpty()) {
+            throw new UserNotExistException(id.toString());
         }
 
-        return false;
+        iUserRepository.delete(id);
+        return true;
 
     }
 

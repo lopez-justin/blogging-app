@@ -10,11 +10,11 @@ public interface IUserUseCase {
 
     UserResponseDTO createUser(UserRequestDTO userRequestDTO);
 
-    Optional<UserResponseDTO> getUserById(Long id);
+    UserResponseDTO getUserById(Long id);
 
     List<UserResponseDTO> getAllUsers();
 
-    Optional<UserResponseDTO> updateUser(UserRequestDTO userRequestDTO);
+    UserResponseDTO updateUser(UserRequestDTO userRequestDTO);
 
     boolean deleteUser(Long id);
 

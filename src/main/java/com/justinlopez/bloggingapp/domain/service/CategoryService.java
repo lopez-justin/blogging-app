@@ -20,16 +20,14 @@ public class CategoryService implements ICategoryUseCase {
         return iCategoryRepository.save(categoryDTO);
     }
 
+
     @Override
     public CategoryDTO getCategoryById(Long id) {
 
-        if (iCategoryRepository.findById(id).isEmpty()) {
-            throw new CategoryNotExistException(id.toString());
-        }
-
-        return iCategoryRepository.findById(id).get();
+        return iCategoryRepository.findById(id).orElseThrow(() -> new CategoryNotExistException(id.toString()));
 
     }
+
 
     @Override
     public List<CategoryDTO> getAllCategories() {
@@ -58,4 +56,6 @@ public class CategoryService implements ICategoryUseCase {
         return true;
 
     }
+
+
 }
