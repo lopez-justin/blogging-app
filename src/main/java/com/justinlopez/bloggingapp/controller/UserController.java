@@ -2,7 +2,7 @@ package com.justinlopez.bloggingapp.controller;
 
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
-import com.justinlopez.bloggingapp.domain.use_case.IUserUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.IUserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

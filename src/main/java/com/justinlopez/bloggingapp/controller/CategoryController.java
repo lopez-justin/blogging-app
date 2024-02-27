@@ -1,7 +1,7 @@
 package com.justinlopez.bloggingapp.controller;
 
 import com.justinlopez.bloggingapp.domain.dto.CategoryDTO;
-import com.justinlopez.bloggingapp.domain.use_case.ICategoryUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.ICategoryUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -4,7 +4,7 @@ import com.justinlopez.bloggingapp.domain.dto.*;
 import com.justinlopez.bloggingapp.domain.repository.ICategoryRepository;
 import com.justinlopez.bloggingapp.domain.repository.IPostRepository;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
-import com.justinlopez.bloggingapp.domain.use_case.IPostUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.IPostUseCase;
 import com.justinlopez.bloggingapp.exception.CategoryNotExistException;
 import com.justinlopez.bloggingapp.exception.PostNotExistException;
 import com.justinlopez.bloggingapp.exception.UserNotExistException;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -88,8 +89,10 @@ public class PostService implements IPostUseCase {
     }
 
     @Override
-    public PostResponseDTO getAllPostsByTitle(String title) {
-        return null;
+    public List<PostRequestDTO> getAllPostsByTitle(String keyword) {
+
+        return iPostRepository.getAllByTitle(keyword);
+
     }
 
     @Override

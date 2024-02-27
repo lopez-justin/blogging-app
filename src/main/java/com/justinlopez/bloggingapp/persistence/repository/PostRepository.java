@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -80,8 +81,10 @@ public class PostRepository implements IPostRepository {
     }
 
     @Override
-    public PostResponseDTO getAllByTitle(String title) {
-        return null;
+    public List<PostRequestDTO> getAllByTitle(String keyword) {
+
+        return iPostMapper.toPostRequestDTOs(iPostJpaRepository.findAllByTitleContainingIgnoreCase(keyword));
+
     }
 
     @Override

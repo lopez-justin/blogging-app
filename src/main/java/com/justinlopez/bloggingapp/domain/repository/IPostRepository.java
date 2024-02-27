@@ -18,7 +18,7 @@ public interface IPostRepository {
 
     PostResponseDTO getAllByCategory(CategoryDTO category, Integer pageNumber, Integer pageSize);
 
-    PostResponseDTO getAllByTitle(String title);
+    List<PostRequestDTO> getAllByTitle(String keyword);
 
     void delete(Long id);
 

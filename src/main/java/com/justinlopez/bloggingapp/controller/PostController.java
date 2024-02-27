@@ -2,11 +2,13 @@ package com.justinlopez.bloggingapp.controller;
 
 import com.justinlopez.bloggingapp.domain.dto.PostRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.PostResponseDTO;
-import com.justinlopez.bloggingapp.domain.use_case.IPostUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.IPostUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -76,6 +78,14 @@ public class PostController {
             @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir) {
 
         return ResponseEntity.ok(iPostUseCase.getAllPosts(pageNumber, pageSize, sortBy, sortDir));
+
+    }
+
+    // Search by title
+    @GetMapping("/posts/search/{keyword}")
+    public ResponseEntity<List<PostRequestDTO>> searchPostsByTitle(@PathVariable String keyword) {
+
+        return ResponseEntity.ok(iPostUseCase.getAllPostsByTitle(keyword));
 
     }
 

@@ -3,7 +3,7 @@ package com.justinlopez.bloggingapp.domain.service;
 import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 import com.justinlopez.bloggingapp.domain.repository.IUserRepository;
-import com.justinlopez.bloggingapp.domain.use_case.IUserUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.IUserUseCase;
 import com.justinlopez.bloggingapp.exception.MissingRequiredFieldsException;
 import com.justinlopez.bloggingapp.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,7 @@ public class UserService implements IUserUseCase {
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 
-        if (userRequestDTO.getName() == null || userRequestDTO.getName().isEmpty() ||
-                userRequestDTO.getEmail() == null || userRequestDTO.getEmail().isEmpty() ||
-                userRequestDTO.getPassword() == null || userRequestDTO.getPassword().isEmpty()) {
+        if (validateUserFields(userRequestDTO)) {
             throw new MissingRequiredFieldsException();
         }
 
@@ -51,6 +49,10 @@ public class UserService implements IUserUseCase {
     @Override
     public UserResponseDTO updateUser(UserRequestDTO userRequestDTO) {
 
+        if (validateUserFields(userRequestDTO)) {
+            throw new MissingRequiredFieldsException();
+        }
+
         if (iUserRepository.findUserById(userRequestDTO.getId()).isEmpty()) {
             throw new UserNotExistException(userRequestDTO.getId().toString());
         }
@@ -70,6 +72,12 @@ public class UserService implements IUserUseCase {
         iUserRepository.delete(id);
         return true;
 
+    }
+
+    private boolean validateUserFields(UserRequestDTO userRequestDTO) {
+        return userRequestDTO.getName() == null || userRequestDTO.getName().isEmpty() ||
+                userRequestDTO.getEmail() == null || userRequestDTO.getEmail().isEmpty() ||
+                userRequestDTO.getPassword() == null || userRequestDTO.getPassword().isEmpty();
     }
 
     

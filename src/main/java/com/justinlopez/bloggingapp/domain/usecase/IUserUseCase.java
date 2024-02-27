@@ -1,10 +1,9 @@
-package com.justinlopez.bloggingapp.domain.use_case;
+package com.justinlopez.bloggingapp.domain.usecase;
 
 import com.justinlopez.bloggingapp.domain.dto.UserRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.UserResponseDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IUserUseCase {
 

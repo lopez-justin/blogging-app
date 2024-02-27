@@ -2,7 +2,7 @@ package com.justinlopez.bloggingapp.domain.service;
 
 import com.justinlopez.bloggingapp.domain.dto.CategoryDTO;
 import com.justinlopez.bloggingapp.domain.repository.ICategoryRepository;
-import com.justinlopez.bloggingapp.domain.use_case.ICategoryUseCase;
+import com.justinlopez.bloggingapp.domain.usecase.ICategoryUseCase;
 import com.justinlopez.bloggingapp.exception.CategoryNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

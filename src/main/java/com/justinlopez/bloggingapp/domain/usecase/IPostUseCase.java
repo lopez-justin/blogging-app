@@ -1,7 +1,9 @@
-package com.justinlopez.bloggingapp.domain.use_case;
+package com.justinlopez.bloggingapp.domain.usecase;
 
 import com.justinlopez.bloggingapp.domain.dto.PostRequestDTO;
 import com.justinlopez.bloggingapp.domain.dto.PostResponseDTO;
+
+import java.util.List;
 
 public interface IPostUseCase {
 
@@ -15,7 +17,7 @@ public interface IPostUseCase {
 
     PostResponseDTO getAllPostsByCategory(Long categoryId, Integer pageNumber, Integer pageSize);
 
-    PostResponseDTO getAllPostsByTitle(String title);
+    List<PostRequestDTO> getAllPostsByTitle(String keyword);
 
     PostRequestDTO updatePost(PostRequestDTO postRequestDTO);
 

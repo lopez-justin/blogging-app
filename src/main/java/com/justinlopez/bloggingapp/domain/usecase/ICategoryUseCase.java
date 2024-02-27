@@ -1,4 +1,4 @@
-package com.justinlopez.bloggingapp.domain.use_case;
+package com.justinlopez.bloggingapp.domain.usecase;
 
 import com.justinlopez.bloggingapp.domain.dto.CategoryDTO;
 
