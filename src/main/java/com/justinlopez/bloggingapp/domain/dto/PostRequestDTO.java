@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter @Setter
 public class PostRequestDTO {
@@ -21,5 +22,7 @@ public class PostRequestDTO {
     private UserResponseDTO user;
 
     private CategoryDTO category;
+
+    private Set<CommentResponseDTO> comments;
 
 }

@@ -11,7 +11,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(
             {UserNotExistException.class,
             CategoryNotExistException.class,
-            PostNotExistException.class}
+            PostNotExistException.class,
+            CommentNotExistException.class}
     )
     public ProblemDetail resourceNotFoundException(RuntimeException e) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());

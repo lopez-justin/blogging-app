@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -38,5 +39,8 @@ public class PostEntity {
     @ManyToOne
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private Set<CommentEntity> comments;
 
 }

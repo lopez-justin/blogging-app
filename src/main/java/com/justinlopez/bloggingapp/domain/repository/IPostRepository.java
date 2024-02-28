@@ -1,7 +1,6 @@
 package com.justinlopez.bloggingapp.domain.repository;
 
 import com.justinlopez.bloggingapp.domain.dto.*;
-import com.justinlopez.bloggingapp.persistence.entity.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
