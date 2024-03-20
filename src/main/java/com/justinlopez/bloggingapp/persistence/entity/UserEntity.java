@@ -3,8 +3,10 @@ package com.justinlopez.bloggingapp.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -22,6 +24,9 @@ public class UserEntity {
     private String password;
 
     private String about;
+
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostEntity> posts;

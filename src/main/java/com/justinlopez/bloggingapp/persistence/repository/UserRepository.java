@@ -83,4 +83,14 @@ public class UserRepository implements IUserRepository {
         iUserJpaRepository.deleteById(id);
     }
 
+    @Override
+    public Optional<UserEntity> findByEmail(String username) {
+        return Optional.of(iUserJpaRepository.findByEmail(username));
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return iUserJpaRepository.existsByEmail(email);
+    }
+
 }

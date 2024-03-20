@@ -1,5 +1,6 @@
 package com.justinlopez.bloggingapp.domain.dto;
 
+import com.justinlopez.bloggingapp.persistence.entity.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +16,8 @@ public class UserRequestDTO {
     private String password;
 
     private String about;
+
+    private String role;
+
 
 }

@@ -29,7 +29,6 @@ public class UserService implements IUserUseCase {
 
     }
 
-
     @Override
     public UserResponseDTO getUserById(Long id) {
 

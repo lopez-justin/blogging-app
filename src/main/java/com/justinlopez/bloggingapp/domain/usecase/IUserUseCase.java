@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IUserUseCase {
 
+
     UserResponseDTO createUser(UserRequestDTO userRequestDTO);
 
     UserResponseDTO getUserById(Long id);
